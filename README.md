@@ -1,4 +1,5 @@
-
+# Raftt
+[![CI](https://github.com/rafttio/linters/actions/workflows/go-test.yml/badge.svg)](https://github.com/rafttio/linters/actions/workflows/go-test.yml)
 # Raftt linters
 
 This package contains Go linters for use in Raftt projects.

@@ -12,8 +12,8 @@ func bar() func() {
 	}
 }
 
-func bazz() (int, float64, error) {
-	return 0, 1.1, nil
+func bazz() (int, struct{}, error) {
+	return 0, struct{}{}, nil
 }
 
 func Tests() {

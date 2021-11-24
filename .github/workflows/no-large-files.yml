@@ -1,0 +1,12 @@
+name: large-files-lint
+on: push
+jobs:
+  large-files-lint:
+    name: Large files lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Verify no large files
+        run: |
+          find . -not -path "./.git/*" -xdev -type f -size +500k
+          [ $(find . -not -path "./.git/*" -xdev -type f -size +500k | wc -l) = "0" ]

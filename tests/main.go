@@ -27,6 +27,7 @@ func Tests() {
 	defer bar()   // want "call discards return value"
 	defer bar()() // ok
 
+	//nolint:errcheck
 	bazz()           // want "call discards return value"
 	_, _, _ = bazz() //ok
 }

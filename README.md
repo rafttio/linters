@@ -1,7 +1,7 @@
 
 # Raftt linters
 
-This package contains several Go linters for use in Raftt projects.
+This package contains Go linters for use in Raftt projects.
 
 ## `discardedreturn`
 

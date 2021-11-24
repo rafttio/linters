@@ -15,5 +15,5 @@ func TestAll(t *testing.T) {
 	}
 
 	testdata := filepath.Join(filepath.Dir(filepath.Dir(wd)), "tests")
-	analysistest.Run(t, testdata, &DiscardAnalyzer, ".")
+	_ = analysistest.Run(t, testdata, &DiscardAnalyzer, ".")
 }

@@ -1,0 +1,20 @@
+name: git-lint
+on: push
+jobs:
+  git-lint:
+    name: Git lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2.3.0
+        with:
+          python-version: 3.9
+      - name: Install gitlint
+        run: |
+          python -m pip install --upgrade pip
+          pip install gitlint
+      - name: Lint Commits
+        run: gitlint --commits ${GITHUB_REF#refs/heads/}...origin/main

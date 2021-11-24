@@ -10,7 +10,7 @@ import (
 var DiscardAnalyzer = analysis.Analyzer{
 	Name: "discardedreturn",
 	Doc:  "todo",
-	Run:  runDiscard,
+	Run:  runDiscardAnalyzer,
 }
 
 func discardCheckCall(pass *analysis.Pass, call *ast.CallExpr) bool {
@@ -26,22 +26,21 @@ func discardCheckCall(pass *analysis.Pass, call *ast.CallExpr) bool {
 	if f.Results() != nil && f.Results().Len() != 0 {
 		pass.Reportf(call.Pos(), "call discards return value "+
 			"(hint: assign to an underscore to ignore)")
-		// 	funcDecl.Name.Name, funcDecl.Name.Name)
 	}
 	return true
 }
 
-func runDiscard(pass *analysis.Pass) (interface{}, error) {
+func runDiscardAnalyzer(pass *analysis.Pass) (interface{}, error) {
 	inspect := func(node ast.Node) bool {
 		switch node := node.(type) {
+		case *ast.DeferStmt:
+			return discardCheckCall(pass, node.Call)
 		case *ast.ExprStmt:
 			call, ok := node.X.(*ast.CallExpr)
 			if !ok {
 				return true
 			}
 			return discardCheckCall(pass, call)
-		case *ast.DeferStmt:
-			return discardCheckCall(pass, node.Call)
 		}
 		return true
 	}
